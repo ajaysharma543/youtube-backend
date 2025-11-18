@@ -3,7 +3,6 @@ import { asyncHandler } from "../../src/utils/asynchandler.js";
 import { ApiError } from "../../src/utils/apierror.js";
 import { ApiResponse } from "../../src/utils/apiresponse.js";
 import { Subscription } from "../models/subscription.model.js";
-=
 const toggleSubscription = asyncHandler(async (req, res) => {
   const { channelId } = req.params;
 
