@@ -1,8 +1,7 @@
 import jwt from "jsonwebtoken";
-import { asyncHandler } from "../utils/asynchandler.js";
 import { User } from "../models/user.model.js";
-import { ApiError } from "../utils/apierror.js";
-
+import { asyncHandler } from "../../src/utils/asynchandler.js";
+import { ApiError } from "../../src/utils/apierror.js";
 export const veryfyJWT = asyncHandler(async (req, _, next) => {
   try {
     const token =

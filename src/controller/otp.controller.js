@@ -1,7 +1,7 @@
-import { asyncHandler } from "../utils/asynchandler.js";
-import { ApiResponse } from "../utils/apiresponse.js";
+import { asyncHandler } from "../../src/utils/asynchandler.js";
+import { ApiError } from "../../src/utils/apierror.js";
+import { ApiResponse } from "../../src/utils/apiresponse.js";
 import { sendEmail } from "../middlewares/checkmail.middleware.js";
-import { ApiError } from "../utils/apierror.js";
 import { User } from "../models/user.model.js";
 import { generateAccessAndRefereshTokens } from "../middlewares/generatetokes.middleware.js";
 import { TempOtp } from "../models/tempotp.model.js";

@@ -1,9 +1,8 @@
 import mongoose, { isValidObjectId } from "mongoose";
-import { asyncHandler } from "../utils/asynchandler.js";
 import { Subscription } from "../models/subscription.model.js";
 import { Video } from "../models/video.model.js";
-import { ApiResponse } from "../utils/apiresponse.js";
-
+import { asyncHandler } from "../../src/utils/asynchandler.js";
+import { ApiResponse } from "../../src/utils/apiresponse.js";
 const getChannelStats = asyncHandler(async (req, res) => {
   const userId = req.user?._id;
 

@@ -1,6 +1,5 @@
 import nodemailer from "nodemailer";
-import { asyncHandler } from "../utils/asynchandler.js";
-
+import { asyncHandler } from "../../src/utils/asynchandler.js";
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {

@@ -1,8 +1,8 @@
 import mongoose, { isValidObjectId } from "mongoose";
 import { Video } from "../models/video.model.js";
-import { ApiError } from "../utils/apierror.js";
-import { ApiResponse } from "../utils/apiresponse.js";
-import { asyncHandler } from "../utils/asynchandler.js";
+import { asyncHandler } from "../../src/utils/asynchandler.js";
+import { ApiError } from "../../src/utils/apierror.js";
+import { ApiResponse } from "../../src/utils/apiresponse.js";
 import { deleteOnCloudinary, uploadcloudinary } from "../utils/cloudinary.js";
 import { User } from "../models/user.model.js";
 import { Like } from "../models/likes.model.js";

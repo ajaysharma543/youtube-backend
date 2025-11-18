@@ -1,7 +1,7 @@
 import mongoose, { isValidObjectId } from "mongoose";
-import { asyncHandler } from "../utils/asynchandler.js";
-import { ApiError } from "../utils/apierror.js";
-import { ApiResponse } from "../utils/apiresponse.js";
+import { asyncHandler } from "../../src/utils/asynchandler.js";
+import { ApiError } from "../../src/utils/apierror.js";
+import { ApiResponse } from "../../src/utils/apiresponse.js";
 import { Watchlater } from "../models/watchlater.model.js";
 
 // Add to Watch Later
