@@ -71,12 +71,15 @@ const registeruser = asyncHandler(async (req, res) => {
     throw new ApiError(500, "Something went wrong while registering the user");
   }
 
-  const options = {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "lax",
-    maxAge: 10 * 24 * 60 * 60 * 1000, // Matches REFRESH_TOKEN_EXPIRY=10d
-  };
+const isProduction = process.env.NODE_ENV === "production";
+
+const options = {
+  httpOnly: true,
+  secure: isProduction,            // HTTPS only
+  sameSite: isProduction ? "none" : "lax",  // allow cross-origin in prod
+  maxAge: 10 * 24 * 60 * 60 * 1000, // 10 days
+};
+
 
   res
     .status(200)
@@ -120,12 +123,14 @@ const loginUser = asyncHandler(async (req, res) => {
     "-password -refreshtoken"
   );
 
-  const options = {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "lax",
-    maxAge: 10 * 24 * 60 * 60 * 1000, // Matches REFRESH_TOKEN_EXPIRY=10d
-  };
+const isProduction = process.env.NODE_ENV === "production";
+
+const options = {
+  httpOnly: true,
+  secure: isProduction,            // HTTPS only
+  sameSite: isProduction ? "none" : "lax",  // allow cross-origin in prod
+  maxAge: 10 * 24 * 60 * 60 * 1000, // 10 days
+};
 
   res
     .status(200)

@@ -5,10 +5,11 @@ const app = express();
 
 app.use(
   cors({
-    origin: process.env.CORS_ORIGIN,
-    credentials: true,
+    origin: process.env.CORS_ORIGIN.split(','), // array of allowed origins
+    credentials: true,                          // must be true for cookies
   })
 );
+
 
 app.use(express.json({ limit: "16kb" })); // lets incoming json data like post
 app.use(express.urlencoded({ extended: true, limit: "16kb" })); //coming data from url
