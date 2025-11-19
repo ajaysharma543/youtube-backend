@@ -3,7 +3,6 @@ import { ApiError } from "../../src/utils/apierror.js";
 import { ApiResponse } from "../../src/utils/apiresponse.js";
 import { sendEmail } from "../middlewares/checkmail.middleware.js";
 import { User } from "../models/user.model.js";
-import { generateAccessAndRefereshTokens } from "../middlewares/generatetokes.middleware.js";
 import { TempOtp } from "../models/tempotp.model.js";
 
 const getotp = asyncHandler(async (req, res) => {

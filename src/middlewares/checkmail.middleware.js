@@ -1,7 +1,10 @@
 import nodemailer from "nodemailer";
 import { asyncHandler } from "../../src/utils/asynchandler.js";
+
 const transporter = nodemailer.createTransport({
-  service: "gmail",
+  host: "smtp.gmail.com",
+  port: 465,
+  secure: true, // SSL
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,
@@ -16,9 +19,10 @@ export const sendEmail = asyncHandler(async (to, subject, text) => {
       subject,
       text,
     });
+
     console.log("✅ Email sent:", info.response);
   } catch (error) {
-    console.error("❌ Error sending email:", error.message);
-    throw error;
+    console.error("❌ Error sending email:", error);
+    throw new Error("Failed to send email");
   }
 });

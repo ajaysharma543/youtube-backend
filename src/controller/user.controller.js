@@ -20,7 +20,7 @@ const registeruser = asyncHandler(async (req, res) => {
   }
 
   const avatarLocalPath = req.files?.avatar?.[0]?.path;
-  let coverImageLocalPath = null; // ✅ Declare properly
+  let coverImageLocalPath = null;
   let coverImage = null;
 
   if (
