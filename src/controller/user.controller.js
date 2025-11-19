@@ -149,6 +149,7 @@ const options = {
     );
 });
 
+
 const logoutuser = asyncHandler(async (req, res) => {
   await User.findByIdAndUpdate(
     req.user?._id,
@@ -161,10 +162,12 @@ const logoutuser = asyncHandler(async (req, res) => {
       new: true,
     }
   );
-  const options = {
-    httpOnly: true,
-    secure: true,
-  };
+const options = {
+  httpOnly: true,
+  secure: process.env.NODE_ENV === "production",
+  sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+};
+
 
   return res
     .status(200)
