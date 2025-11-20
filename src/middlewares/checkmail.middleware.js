@@ -1,18 +1,23 @@
 import nodemailer from "nodemailer";
 import { asyncHandler } from "../../src/utils/asynchandler.js";
 
-   const transporter = nodemailer.createTransport({
+const transporter = nodemailer.createTransport({
   host: "smtp-relay.brevo.com",
   port: 587,
   secure: false,
   auth: {
     user: process.env.BREVO_USER,
-    pass: process.env.BREVO_SMTP_KEY
+    pass: process.env.BREVO_SMTP_KEY,
   },
-       tls: {
+  tls: {
     rejectUnauthorized: false,
   },
-    })
+  connectionTimeout: 60000,
+  greetingTimeout: 60000,
+  socketTimeout: 60000,
+  // IMPORTANT: force IPv4 for Render
+  family: 4
+});
 export const sendEmail = asyncHandler(async (to, subject, text) => {
    try{
      const info = await transporter.sendMail({
