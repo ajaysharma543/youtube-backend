@@ -88,7 +88,7 @@ const options = {
     .json(
       new ApiResponse(
         200,
-        { user: accesstoken, refreshtoken },
+        { user: accesstoken, refreshtoken }, createdUser,
         "User registered successfully"
       )
     );
@@ -239,6 +239,7 @@ const changeCurrentPassword = asyncHandler(async (req, res) => {
     .status(200)
     .json(new ApiResponse(200, {}, "Password changed successfully"));
 });
+
 const resetPassword = asyncHandler(async (req, res) => {
   const { email, newPassword } = req.body;
 
@@ -259,6 +260,15 @@ const resetPassword = asyncHandler(async (req, res) => {
   return res
     .status(200)
     .json(new ApiResponse(200, {}, "Password reset successfully"));
+});
+const checkEmail = asyncHandler(async (req, res) => {
+  const { email } = req.body;
+  if (!email) throw new ApiError(400, "Email is required");
+
+  const user = await User.findOne({ email });
+  if (!user) throw new ApiError(404, "User not found");
+
+  return res.status(200).json(new ApiResponse(200, {}, "Email exists"));
 });
 
 const changeaccountdetails = asyncHandler(async (req, res) => {
@@ -620,4 +630,5 @@ export {
   getWatchHistory,
   resetPassword,
   description,
+  checkEmail
 };

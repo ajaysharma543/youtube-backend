@@ -4,6 +4,7 @@ import {
   changeCurrentPassword,
   changeuseravatar,
   changeusercoverimage,
+  checkEmail,
   deleteallWatchHistory,
   deleteWatchHistory,
   description,
@@ -41,6 +42,9 @@ router.route("/getcurrent-user").get(veryfyJWT, getCurrentUser);
 router
   .route("/change-password")
   .patch(uplaod.none(), veryfyJWT, changeCurrentPassword);
+  router
+  .route("/email")
+  .post(uplaod.none(), checkEmail)
 router.route("/change-accountdetails").patch(veryfyJWT, changeaccountdetails);
 router.route("/description").patch(veryfyJWT, description);
 router
