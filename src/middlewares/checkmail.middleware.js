@@ -1,20 +1,28 @@
-import { Resend } from 'resend';
+import nodemailer from "nodemailer";
 import { asyncHandler } from "../../src/utils/asynchandler.js";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
+    const transporter = nodemailer.createTransport({
+      host: "smtp-relay.brevo.com",
+      port: 587,
+      secure: false,
+      auth: {
+        user: process.env.BREVO_USER,     
+        pass: process.env.BREVO_SMTP_KEY, 
+      },
+    })
 export const sendEmail = asyncHandler(async (to, subject, text) => {
-  try {
-    const data = await resend.emails.send({
-      from: 'Your App Name <onboarding@resend.dev>',
+   try{
+     const info = await transporter.sendMail({
+      from: process.env.BREVO_USER,  
       to,
       subject,
       text,
     });
 
-    console.log("Email sent:", data);
-  } catch (error) {
-    console.error("Error sending email:", error.message);
-    throw error;
+    console.log("Email sent:", info.messageId);
+   }
+   catch (error) {
+    console.error("Email error:", error);
   }
-});
+}
+)
