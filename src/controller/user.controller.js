@@ -71,15 +71,14 @@ const registeruser = asyncHandler(async (req, res) => {
     throw new ApiError(500, "Something went wrong while registering the user");
   }
 
-const isProduction = process.env.NODE_ENV === "production";
+  const isProduction = process.env.NODE_ENV === "production";
 
-const options = {
-  httpOnly: true,
-  secure: isProduction,            // HTTPS only
-  sameSite: isProduction ? "none" : "lax",  // allow cross-origin in prod
-  maxAge: 10 * 24 * 60 * 60 * 1000, // 10 days
-};
-
+  const options = {
+    httpOnly: true,
+    secure: isProduction, // HTTPS only
+    sameSite: isProduction ? "none" : "lax", // allow cross-origin in prod
+    maxAge: 10 * 24 * 60 * 60 * 1000, // 10 days
+  };
 
   res
     .status(200)
@@ -88,7 +87,8 @@ const options = {
     .json(
       new ApiResponse(
         200,
-        { user: accesstoken, refreshtoken }, createdUser,
+        { user: accesstoken, refreshtoken },
+        createdUser,
         "User registered successfully"
       )
     );
@@ -123,14 +123,14 @@ const loginUser = asyncHandler(async (req, res) => {
     "-password -refreshtoken"
   );
 
-const isProduction = process.env.NODE_ENV === "production";
+  const isProduction = process.env.NODE_ENV === "production";
 
-const options = {
-  httpOnly: true,
-  secure: isProduction,            // HTTPS only
-  sameSite: isProduction ? "none" : "lax",  // allow cross-origin in prod
-  maxAge: 10 * 24 * 60 * 60 * 1000, // 10 days
-};
+  const options = {
+    httpOnly: true,
+    secure: isProduction, // HTTPS only
+    sameSite: isProduction ? "none" : "lax", // allow cross-origin in prod
+    maxAge: 10 * 24 * 60 * 60 * 1000, // 10 days
+  };
 
   res
     .status(200)
@@ -149,7 +149,6 @@ const options = {
     );
 });
 
-
 const logoutuser = asyncHandler(async (req, res) => {
   await User.findByIdAndUpdate(
     req.user?._id,
@@ -162,12 +161,11 @@ const logoutuser = asyncHandler(async (req, res) => {
       new: true,
     }
   );
-const options = {
-  httpOnly: true,
-  secure: process.env.NODE_ENV === "production",
-  sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
-};
-
+  const options = {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+  };
 
   return res
     .status(200)
@@ -630,5 +628,5 @@ export {
   getWatchHistory,
   resetPassword,
   description,
-  checkEmail
+  checkEmail,
 };
