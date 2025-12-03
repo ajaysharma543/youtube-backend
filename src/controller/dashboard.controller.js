@@ -36,21 +36,10 @@ const getChannelStats = asyncHandler(async (req, res) => {
         as: "totallikes",
       },
     },
-     {
-      $lookup: {
-        from: "comments",
-        localField: "_id",
-        foreignField: "video",
-        as: "totalcomments",
-      },
-    },
     {
       $project: {
         totallikes: {
           $size: "$totallikes",
-        },
-        totalcomments : {
-           $size: "$totalcomments",
         },
         totalviews: "$views",
         totalVideos: 1,
@@ -64,9 +53,6 @@ const getChannelStats = asyncHandler(async (req, res) => {
         },
         totallikes: {
           $sum: "$totallikes",
-        },
-         totalcomments: {
-          $sum: "$totalcomments",
         },
         totalviews: {
           $sum: "$totalviews",
@@ -91,7 +77,6 @@ const getChannelStats = asyncHandler(async (req, res) => {
     totallikes: Videos[0]?.totallikes || 0,
     totalviews: Videos[0]?.totalviews || 0,
     totalVideos: Videos[0]?.totalVideos || 0,
-    totalcomments: Videos[0]?.totalcomments || 0,
     likePercentage: Videos[0].likePercentage,
   };
 
